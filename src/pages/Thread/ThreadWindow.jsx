@@ -90,19 +90,22 @@ const ThreadHeader = ({ thread, onCloseThread, currentUser }) => {
         </Box>
       </Box>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        {thread.participants.slice(0, 3).map((participant, idx) => (
-          <Tooltip key={idx} title={participant.name} placement="top">
+        {thread.participants.map((participant, idx) => (
+          <Tooltip
+            key={participant._id}
+            title={participant.name}
+            placement="top"
+          >
             <Avatar
               sx={{
                 ml: idx === 0 ? 0 : -1,
-                zIndex: idx === 0 ? 3 : 2 - idx,
+                zIndex: 100 - idx,
                 width: 36,
                 height: 36,
                 position: "relative",
               }}
               alt={participant.name}
             >
-              {/* TODO: Conditional based on the online status */}
               <Box
                 sx={{
                   position: "absolute",
@@ -121,7 +124,7 @@ const ThreadHeader = ({ thread, onCloseThread, currentUser }) => {
           </Tooltip>
         ))}
 
-        {/* Show "Mark as closed" option only if thread is open AND the current user is the creator */}
+        {/* "Mark as closed" option remains unchanged */}
         {thread.status === "open" &&
           thread.participants[0]._id === currentUser._id && (
             <Box sx={{ ml: 2 }}>

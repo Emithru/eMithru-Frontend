@@ -86,32 +86,32 @@ const ThreadList = ({
                   <TableCell>
                     {new Date(thread.createdAt).toLocaleDateString()}
                   </TableCell>
+
                   <TableCell>
                     <Box sx={{ display: "flex", cursor: "pointer", ml: -1 }}>
-                      {thread.participants
-                        .slice(0, 3)
-                        .map((participant, idx) => (
-                          <Tooltip
-                            key={idx}
-                            title={participant.name}
-                            placement="top"
+                      {thread.participants.map((participant, idx) => (
+                        <Tooltip
+                          key={participant._id}
+                          title={participant.name}
+                          placement="top"
+                        >
+                          <Avatar
+                            sx={{
+                              ml: idx === 0 ? 0 : -1.5,
+                              zIndex: 100 - idx,
+                              width: 32,
+                              height: 32,
+                              fontSize: "0.8rem",
+                            }}
+                            alt={participant.name}
                           >
-                            <Avatar
-                              sx={{
-                                ml: idx === 0 ? 0 : -1.5,
-                                zIndex: idx === 0 ? 3 : 2 - idx,
-                                width: 32,
-                                height: 32,
-                                fontSize: "0.8rem",
-                              }}
-                              alt={participant.name}
-                            >
-                              {participant.name[0]}
-                            </Avatar>
-                          </Tooltip>
-                        ))}
+                            {participant.name[0]}
+                          </Avatar>
+                        </Tooltip>
+                      ))}
                     </Box>
                   </TableCell>
+
                   <TableCell>
                     <Box
                       sx={{
